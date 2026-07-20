@@ -1,0 +1,12 @@
+{
+  "name": "stock-draft-annual",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx vercel dev",
+    "serve": "npx serve .",
+    "basis": "node scripts/fetch-basis.mjs",
+    "test": "node --test"
+  }
+}

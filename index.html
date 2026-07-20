@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Live standings for the one-year stock draft." />
+  <meta name="theme-color" content="#f4efe5" />
+  <title>Market League Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Caslon+Display&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Market League Review home">MLR</a>
+    <div class="market-status" id="market-status">
+      <span class="status-dot"></span>
+      <span>Checking market</span>
+    </div>
+    <p class="updated" id="updated">Quotes not loaded</p>
+  </header>
+
+  <main id="top">
+    <section class="masthead page-width">
+      <div class="title-panel">
+        <p class="kicker">The One-Year Stock Draft · 2026–27</p>
+        <h1>Market League<br />Review</h1>
+        <div class="title-footer">
+          <p>Five investors. Seventy-five convictions. One short each.</p>
+          <p>Vol. 01 <span>·</span> Live Edition</p>
+        </div>
+      </div>
+
+      <aside class="season-panel" aria-labelledby="season-heading">
+        <div>
+          <p class="kicker">Season Clock</p>
+          <h2 id="season-heading"><span id="days-remaining">—</span> days to final results</h2>
+          <p class="date-range">Jul 17, 2026 <span>→</span> Jul 17, 2027</p>
+        </div>
+        <div>
+          <div class="progress-label"><span>Season progress</span><strong id="percent-complete">0%</strong></div>
+          <div class="progress-track" role="progressbar" aria-label="Season progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+        </div>
+        <div class="season-stats">
+          <div><strong id="days-elapsed">0</strong><span>days elapsed</span></div>
+          <div><strong id="trading-finale">Jul 16</strong><span>final market close</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="page-width standings-section" aria-labelledby="standings-heading">
+      <div class="section-rule">
+        <div><p class="kicker">The Main Board</p><h2 id="standings-heading">Current Standings</h2></div>
+        <p>Returns use fifteen equal-weight positions. Shorts gain when their price falls.</p>
+      </div>
+      <div class="standings-grid" id="standings" aria-live="polite"></div>
+    </section>
+
+    <section class="page-width portfolios-section" aria-labelledby="portfolios-heading">
+      <div class="section-rule">
+        <div><p class="kicker">Full Draft Book</p><h2 id="portfolios-heading">Inside the Portfolios</h2></div>
+        <p>Select a name to inspect every holding and its contribution.</p>
+      </div>
+      <div class="portfolio-list" id="portfolios"></div>
+    </section>
+
+    <section class="page-width methodology">
+      <p class="kicker">The Fine Print</p>
+      <div>
+        <h2>How the score is kept</h2>
+        <p>Each holding begins at 6.67% of its participant’s portfolio. Long return is current price divided by the July 17, 2026 close, minus one. Short return reverses that calculation. The portfolio result is the arithmetic mean of all fifteen position returns.</p>
+      </div>
+      <div>
+        <h2>Market timing</h2>
+        <p>Quotes refresh during regular US market hours and retain the most recent close outside those hours. Since July 17, 2027 falls on Saturday, final tradable prices are captured at market close Friday, July 16.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-width">
+    <span>Market League Review</span>
+    <span>Data delayed up to two minutes</span>
+  </footer>
+
+  <template id="empty-state-template">
+    <div class="empty-state">
+      <strong>Waiting for cost basis</strong>
+      <span>Run the basis setup after adding the market data API key.</span>
+    </div>
+  </template>
+
+  <script type="module" src="/src/app.js"></script>
+</body>
+</html>
