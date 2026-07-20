@@ -4,7 +4,7 @@ import { isUsMarketOpen, rankPlayers, scorePlayer, seasonProgress } from "./calc
 
 const formatPercent = (value) => value === null ? "—" : `${value >= 0 ? "+" : ""}${(value * 100).toFixed(2)}%`;
 const formatMoney = (value) => value === null ? "—" : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
-const quoteState = { quotes: {}, updatedAt: null, loading: false };
+const quoteState = { quotes: {}, basis: COST_BASIS, updatedAt: null, loading: false, provider: null };
 
 function updateSeason() {
   const progress = seasonProgress(new Date(), SEASON);
@@ -24,7 +24,7 @@ function updateMarketStatus() {
 }
 
 function render() {
-  const players = rankPlayers(DRAFT.map((player) => scorePlayer(player, COST_BASIS, quoteState.quotes)));
+  const players = rankPlayers(DRAFT.map((player) => scorePlayer(player, quoteState.basis, quoteState.quotes)));
   document.getElementById("standings").innerHTML = players.map((player, index) => `
     <article class="rank-card ${player.complete ? "" : "incomplete"}">
       <div>
@@ -72,15 +72,19 @@ function emptyState() {
 }
 
 async function loadQuotes() {
-  if (quoteState.loading || Object.keys(COST_BASIS).length === 0) return;
+  if (quoteState.loading) return;
   quoteState.loading = true;
   try {
     const response = await fetch("/api/quotes", { headers: { Accept: "application/json" } });
     if (!response.ok) throw new Error(`Quote request failed (${response.status})`);
     const payload = await response.json();
     quoteState.quotes = payload.quotes ?? {};
+    quoteState.basis = payload.basis ?? COST_BASIS;
+    quoteState.provider = payload.provider;
     quoteState.updatedAt = payload.updatedAt;
-    document.getElementById("updated").textContent = `Updated ${new Date(payload.updatedAt).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+    const sampleMode = payload.provider === "sample";
+    document.getElementById("demo-banner").hidden = !sampleMode;
+    document.getElementById("updated").textContent = `${sampleMode ? "Sample data" : "Updated"} ${new Date(payload.updatedAt).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
     render();
   } catch (error) {
     document.getElementById("updated").textContent = "Quote feed unavailable";

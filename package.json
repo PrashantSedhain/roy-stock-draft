@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npx vercel dev",
-    "serve": "npx serve .",
-    "basis": "node scripts/fetch-basis.mjs",
+    "dev": "npx serve . --listen 3000",
+    "dev:vercel": "npx vercel dev --local --yes",
+    "dev:sample": "USE_MOCK_DATA=true npx vercel dev --local --yes",
+    "serve": "npx serve . --listen 3000",
+    "basis": "node --env-file=.env.local scripts/fetch-basis.mjs",
     "test": "node --test"
   }
 }

@@ -1,5 +1,6 @@
 import { isUsMarketOpen } from "../src/calculations.js";
 import { SYMBOLS } from "../src/draft.js";
+import { makeDemoMarketData } from "../src/demo-data.js";
 
 const FINNHUB_URL = "https://finnhub.io/api/v1/quote";
 const MARKETDATA_URL = "https://api.marketdata.app/v1/stocks/quotes";
@@ -33,6 +34,18 @@ async function fetchFinnhubQuotes(token) {
 
 export default async function handler(_request, response) {
   const open = isUsMarketOpen();
+  if (process.env.USE_MOCK_DATA === "true") {
+    const demo = makeDemoMarketData();
+    response.setHeader("Cache-Control", "no-store");
+    return response.status(200).json({
+      ...demo,
+      provider: "sample",
+      marketOpen: open,
+      updatedAt: new Date().toISOString(),
+      requested: SYMBOLS.length,
+      received: Object.keys(demo.quotes).length
+    });
+  }
   const maxAge = open ? 120 : 3600;
   response.setHeader("Cache-Control", `public, s-maxage=${maxAge}, stale-while-revalidate=${open ? 300 : 43200}`);
   response.setHeader("Content-Type", "application/json; charset=utf-8");

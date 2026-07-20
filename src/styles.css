@@ -18,8 +18,20 @@ body {
   min-width: 320px;
   color: var(--ink);
   background: var(--paper);
-  font-family: "DM Sans", sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+.demo-banner {
+  padding: 8px 16px;
+  color: #171717;
+  background: #ffd166;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 button, summary { font: inherit; }
@@ -55,16 +67,16 @@ button, summary { font: inherit; }
 }
 
 .title-panel, .season-panel { border: 1px solid var(--line); background: var(--white); }
-.title-panel { min-height: 470px; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(24px, 5vw, 58px); }
+.title-panel { min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(22px, 4vw, 38px); }
 .kicker { margin: 0; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
 
 .title-panel h1 {
-  margin: 32px 0;
-  font-family: "Libre Caslon Display", Georgia, serif;
-  font-size: clamp(4rem, 10.8vw, 10rem);
-  font-weight: 400;
-  line-height: 0.73;
-  letter-spacing: -0.075em;
+  margin: 24px 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 8.2vw, 7.6rem);
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.07em;
   text-transform: uppercase;
 }
 
@@ -73,7 +85,7 @@ button, summary { font: inherit; }
 .title-footer span { padding-inline: 5px; }
 
 .season-panel { display: grid; align-content: space-between; gap: 28px; padding: clamp(22px, 3vw, 34px); }
-.season-panel h2 { margin: 12px 0 0; font-family: "Libre Caslon Display", Georgia, serif; font-size: clamp(2.3rem, 4.2vw, 4.2rem); font-weight: 400; line-height: 0.94; letter-spacing: -0.055em; }
+.season-panel h2 { margin: 12px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 3.4vw, 3.2rem); font-weight: 700; line-height: 0.98; letter-spacing: -0.045em; }
 .date-range { margin: 16px 0 0; color: var(--muted); font-size: 0.85rem; }
 .date-range span { padding-inline: 7px; }
 .progress-label { display: flex; justify-content: space-between; margin-bottom: 9px; color: var(--muted); font-size: 0.75rem; }
@@ -83,12 +95,12 @@ button, summary { font: inherit; }
 .season-stats { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
 .season-stats div { padding-top: 16px; }
 .season-stats div + div { padding-left: 16px; border-left: 1px solid var(--line); }
-.season-stats strong { display: block; font-family: "Libre Caslon Display", Georgia, serif; font-size: 2.25rem; font-weight: 400; line-height: 1; }
+.season-stats strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 2rem; font-weight: 700; line-height: 1; }
 .season-stats span { display: block; margin-top: 6px; color: var(--muted); font-size: 0.72rem; }
 
 .standings-section, .portfolios-section { padding-block: 34px; border-bottom: 4px double var(--line); }
 .section-rule { display: flex; justify-content: space-between; gap: 40px; align-items: end; margin-bottom: 20px; }
-.section-rule h2 { margin: 5px 0 0; font-family: "Libre Caslon Display", Georgia, serif; font-size: clamp(2.2rem, 4vw, 4.2rem); font-weight: 400; letter-spacing: -0.045em; }
+.section-rule h2 { margin: 5px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem, 3.4vw, 3.5rem); font-weight: 700; letter-spacing: -0.04em; }
 .section-rule > p { max-width: 440px; margin: 0 0 7px; color: var(--muted); font-size: 0.82rem; text-align: right; }
 
 .standings-grid { display: grid; grid-template-columns: repeat(5, minmax(150px, 1fr)); gap: 12px; }
@@ -96,8 +108,8 @@ button, summary { font: inherit; }
 .rank-card:first-child { color: var(--white); background: var(--ink); }
 .rank-card-top { display: flex; justify-content: space-between; gap: 8px; align-items: start; }
 .rank-card small { font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }
-.rank-card h3 { margin: 18px 0 0; font-family: "Libre Caslon Display", Georgia, serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 400; line-height: 0.9; letter-spacing: -0.055em; }
-.rank-return { display: block; font-size: clamp(2rem, 3.2vw, 3.1rem); line-height: 1; letter-spacing: -0.075em; }
+.rank-card h3 { margin: 18px 0 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.7rem, 2.4vw, 2.2rem); font-weight: 700; line-height: 0.95; letter-spacing: -0.045em; }
+.rank-return { display: block; font-size: clamp(1.8rem, 2.6vw, 2.4rem); line-height: 1; letter-spacing: -0.06em; }
 .rank-card:first-child .rank-return { color: #ffd166; }
 .rank-card p { margin: 10px 0 0; color: var(--muted); font-size: 0.76rem; }
 .rank-card:first-child p { color: #c8c4bd; }
@@ -113,7 +125,7 @@ button, summary { font: inherit; }
 .portfolio summary::-webkit-details-marker { display: none; }
 .portfolio summary::after { content: "+"; display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid var(--line); border-radius: 50%; }
 .portfolio[open] summary::after { content: "−"; }
-.portfolio h3 { margin: 0; font-family: "Libre Caslon Display", Georgia, serif; font-size: 1.55rem; font-weight: 400; letter-spacing: -0.04em; }
+.portfolio h3 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 1.45rem; font-weight: 700; letter-spacing: -0.035em; }
 .portfolio-total { font-weight: 700; }
 .portfolio-content { padding: 0 20px 20px; border-top: 1px solid var(--soft-line); }
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -128,13 +140,13 @@ button, summary { font: inherit; }
 .empty-state strong { color: var(--ink); }
 
 .methodology { display: grid; grid-template-columns: 0.55fr 1fr 1fr; gap: 36px; padding-block: 38px; }
-.methodology h2 { margin: 0 0 10px; font-family: "Libre Caslon Display", Georgia, serif; font-size: 1.55rem; font-weight: 400; }
+.methodology h2 { margin: 0 0 10px; font-family: Georgia, "Times New Roman", serif; font-size: 1.45rem; font-weight: 700; }
 .methodology p:not(.kicker) { margin: 0; color: var(--muted); font-size: 0.82rem; line-height: 1.65; }
 footer { display: flex; justify-content: space-between; gap: 20px; padding-block: 20px 38px; color: var(--muted); border-top: 1px solid var(--line); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
 @media (max-width: 1050px) {
   .masthead { grid-template-columns: 1fr; }
-  .title-panel { min-height: 390px; }
+  .title-panel { min-height: 300px; }
   .standings-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .methodology { grid-template-columns: 1fr 1fr; }
   .methodology > .kicker { grid-column: 1 / -1; }
@@ -145,8 +157,8 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding-block
   .site-header { grid-template-columns: 1fr auto; padding-inline: 14px; }
   .updated { display: none; }
   .market-status { justify-self: end; }
-  .title-panel { min-height: 340px; padding: 24px; }
-  .title-panel h1 { font-size: clamp(3.35rem, 18vw, 6rem); }
+  .title-panel { min-height: 300px; padding: 24px; }
+  .title-panel h1 { font-size: clamp(3rem, 16vw, 5.5rem); }
   .title-footer, .section-rule { align-items: flex-start; flex-direction: column; }
   .section-rule { gap: 10px; }
   .section-rule > p { text-align: left; }

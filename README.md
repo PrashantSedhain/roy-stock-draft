@@ -14,35 +14,47 @@ A lightweight, responsive stock-draft leaderboard using the Executive Broadsheet
 
 ## Local setup
 
-1. Create `.env.local` with one quote provider:
+### Validate with sample data
 
-   ```text
-   FINNHUB_API_KEY=your_key
-   ```
+Sample mode exercises all 70 symbols, portfolio calculations, short positions, ranking, tables, and the local API without consuming provider credits. Run:
 
-   Or, for a single batch quote request:
+```bash
+npm run dev:sample
+```
+
+Open `http://localhost:3000`. A yellow **Sample data mode** banner must be visible, all five standings must have returns, and every expanded portfolio must show 15 priced positions. Test mobile sizing with browser responsive mode. Sample mode is never enabled unless `USE_MOCK_DATA=true` is explicitly configured.
+
+### Validate with Market Data
+
+1. Replace the sample setting in `.env.local` with:
 
    ```text
    MARKETDATA_API_TOKEN=your_token
    ```
 
-2. Populate the immutable July 17 cost basis using the configured provider:
+2. Populate the immutable July 17 cost basis. This reads the token from `.env.local`:
 
    ```bash
-   MARKETDATA_API_TOKEN=your_token npm run basis
+   npm run basis
    ```
 
-   If both provider variables are set, Market Data takes precedence. Finnhub can instead be used with `FINNHUB_API_KEY=your_key npm run basis`.
-
-3. Review `src/basis.js`. New, delisted, or unsupported symbols may need manual closing prices.
-
-4. Run through Vercel:
+3. Start the complete local app:
 
    ```bash
-   npm run dev
+   npm run dev:vercel
    ```
 
-Static UI work can use `npm run serve`, but `/api/quotes` requires Vercel dev or deployment.
+4. Check the normalized API response directly at `http://localhost:3000/api/quotes`. It should report `"provider":"marketdata"`, `"requested":70`, and `"received":70` before the UI is considered ready to deploy.
+
+Finnhub can be used instead by setting:
+
+```text
+FINNHUB_API_KEY=your_key
+```
+
+Then run `npm run basis`. If both provider variables are set, Market Data takes precedence. Review `src/basis.js` after either basis command because new, delisted, or unsupported symbols may require manual closing prices.
+
+For static UI work without API functions, use `npm run dev`. The commands are separate because a `dev` script that invokes `vercel dev` causes Vercel CLI to recursively invoke itself.
 
 ## Provider note
 
