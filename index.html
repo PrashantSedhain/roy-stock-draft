@@ -54,6 +54,15 @@
         <div><p class="kicker">The Main Board</p><h2 id="standings-heading">Current Standings</h2></div>
         <p>Returns use fifteen equal-weight positions. Shorts gain when their price falls.</p>
       </div>
+      <div class="ticker-search" role="search">
+        <label for="ticker-search"><span>Find a ticker</span><small>Search all 75 picks</small></label>
+        <div class="search-field">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" /></svg>
+          <input id="ticker-search" type="search" inputmode="search" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="8" placeholder="Try NVDA or AXON" />
+          <button id="clear-search" type="button" hidden>Clear</button>
+        </div>
+        <p id="search-status" aria-live="polite">Showing every portfolio</p>
+      </div>
       <div class="standings-grid" id="standings" aria-live="polite"></div>
     </section>
 

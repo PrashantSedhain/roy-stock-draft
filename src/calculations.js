@@ -29,6 +29,16 @@ export function rankPlayers(players) {
   });
 }
 
+export function normalizeTickerQuery(query) {
+  return query.toUpperCase().replace(/[^A-Z0-9.-]/g, "").slice(0, 8);
+}
+
+export function filterPlayersByTicker(players, query) {
+  const normalized = normalizeTickerQuery(query);
+  if (!normalized) return players;
+  return players.filter((player) => player.picks.some((symbol) => symbol.includes(normalized)));
+}
+
 export function seasonProgress(now, season) {
   const start = new Date(season.start);
   const end = new Date(season.anniversary);

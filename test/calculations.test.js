@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { isUsMarketOpen, positionReturn, rankPlayers, scorePlayer, seasonProgress } from "../src/calculations.js";
+import { filterPlayersByTicker, isUsMarketOpen, normalizeTickerQuery, positionReturn, rankPlayers, scorePlayer, seasonProgress } from "../src/calculations.js";
 
 test("long positions gain when price rises", () => {
   assert.equal(positionReturn("long", 100, 125), 0.25);
@@ -42,4 +42,17 @@ test("market hours use the New York schedule", () => {
   assert.equal(isUsMarketOpen(new Date("2026-07-20T21:00:00Z")), false);
   assert.equal(isUsMarketOpen(new Date("2026-09-07T14:00:00Z")), false);
   assert.equal(isUsMarketOpen(new Date("2026-11-27T19:00:00Z")), false);
+});
+
+test("ticker search normalizes input and finds every holder", () => {
+  const players = [
+    { name: "One", picks: ["AXON", "MSFT"] },
+    { name: "Two", picks: ["AXON", "NVDA"] },
+    { name: "Three", picks: ["META"] }
+  ];
+  assert.equal(normalizeTickerQuery(" axon! "), "AXON");
+  assert.deepEqual(filterPlayersByTicker(players, "axon").map((player) => player.name), ["One", "Two"]);
+  assert.deepEqual(filterPlayersByTicker(players, "nv").map((player) => player.name), ["Two"]);
+  assert.equal(filterPlayersByTicker(players, "zzz").length, 0);
+  assert.equal(filterPlayersByTicker(players, "").length, 3);
 });
